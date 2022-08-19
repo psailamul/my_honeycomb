@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <title>My experiment</title>
+    <script src="https://unpkg.com/jspsych@7.2.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.1"></script>
+    <link href="https://unpkg.com/jspsych@7.2.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body></body>
+<script>
+
+    var jsPsych = initJsPsych({
+        on_trial_finish: function (data) {
+            console.log(data)
+        }
+    });
+
+    var timeline = [];
+    var instructions = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `
+        <p>Blue and Orange!</>
+        <div style='width: 700px;'>
+          <div style='float: left;'><img src='img/blue.png' /></div>
+          <div style='float: right;'><img src='img/orange.png' /></div>
+        </div>`
+    };
+    timeline.push(instructions);
+
+    var blue_trial = {
+        type: jsPsychImageKeyboardResponse,
+        stimulus: 'img/blue.png'
+    };
+    timeline.push(blue_trial);
+
+    jsPsych.run(timeline);
+</script>
+
+</html>
